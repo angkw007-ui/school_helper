@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>학교업무 도우미</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Noto+Serif+KR:wght@700;900&display=swap" rel="stylesheet">
+<style>
+:root{--g:#16a34a;--gd:#15803d;--gl:#ecfdf5;--g2:#d1fae5;--bg:#f4faf6;--w:#fff;--bd:#dcebe1;--t:#14231a;--t2:#4b5f53;--m:#8aa094;--warn:#d9480f;--r:14px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--t);font-family:'Noto Sans KR',sans-serif;line-height:1.6}
+button,input,select,textarea{font:inherit}
+.top{background:linear-gradient(135deg,#16a34a,#15803d);color:#fff;text-align:center;font-size:.78rem;padding:6px}
+header{background:var(--w);border-bottom:1.5px solid var(--bd);position:sticky;top:0;z-index:20}
+.hi{max-width:1200px;margin:auto;padding:0 1.25rem;height:64px;display:flex;align-items:center;gap:10px}
+.logo{display:flex;align-items:center;gap:10px;font:900 1.1rem 'Noto Serif KR',serif;white-space:nowrap}
+.mark{width:38px;height:38px;border-radius:10px;background:var(--g);display:grid;place-items:center;color:#fff;font-size:1.2rem}
+.search{flex:1;max-width:400px}.search input{width:100%;padding:9px 16px;border:1.5px solid var(--bd);border-radius:99px;background:var(--bg);outline:none}
+.search input:focus{border-color:var(--g);background:#fff;box-shadow:0 0 0 3px #16a34a22}
+.sp{flex:1}
+.btn{border:1.5px solid var(--bd);background:var(--w);color:var(--t2);padding:7px 13px;border-radius:8px;font-size:.8rem;font-weight:700;cursor:pointer;white-space:nowrap}
+.btn:hover{border-color:var(--g);color:var(--gd);background:var(--gl)}
+.btn.p{background:var(--g);border-color:var(--g);color:#fff}.btn.p:hover{background:var(--gd)}
+.btn.d{color:var(--warn)}.btn.d:hover{border-color:var(--warn);background:#fff4ee}
+.badge{font-size:.72rem;font-weight:700;background:var(--g2);color:var(--gd);padding:3px 10px;border-radius:99px}
+.av{width:32px;height:32px;border-radius:50%;border:2px solid var(--g2)}
+main{max-width:1200px;margin:auto;padding:1.5rem 1.25rem 3rem}
+.hero{background:var(--w);border:1.5px solid var(--bd);border-radius:20px;padding:1.6rem 2rem;display:flex;gap:1.5rem;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:1rem}
+.hero h1{font:700 1.9rem 'Noto Serif KR',serif}.hero h1 span{color:var(--g)}.hero p{color:var(--t2);font-size:.9rem}
+.stats{display:flex;gap:.75rem}.st{background:var(--gl);border:1.5px solid var(--g2);border-radius:12px;padding:10px 18px;text-align:center;min-width:84px}
+.st b{display:block;font:900 1.6rem 'Noto Serif KR',serif;color:var(--g)}.st small{color:var(--m);font-size:.7rem}
+.notice{background:#f0fdf4;border:1.5px solid #86efac;color:#166534;border-radius:12px;padding:10px 16px;font-size:.84rem;margin-bottom:1rem;display:flex;gap:8px}
+.notice u{margin-left:auto;cursor:pointer;text-decoration:none;opacity:.6}
+.quick{background:var(--w);border:1.5px solid var(--bd);border-radius:16px;padding:.9rem 1.1rem;margin-bottom:1rem}
+.quick h4{font-size:.8rem;color:var(--gd);margin:.4rem 0 .3rem}.quick h4:first-child{margin-top:0}
+.chips{display:flex;flex-wrap:wrap;gap:6px}.chip{background:var(--gl);border:1.5px solid var(--g2);border-radius:99px;padding:3px 12px;font-size:.8rem;font-weight:500;cursor:pointer}
+.chip:hover{background:var(--g2)}.chip small{color:var(--m);margin-left:4px}
+.bar{display:flex;gap:10px;align-items:center;margin-bottom:1rem}
+.tabs{flex:1;display:flex;gap:4px;background:var(--w);border:1.5px solid var(--bd);border-radius:12px;padding:5px;overflow-x:auto;scrollbar-width:none}
+.tab{border:0;background:none;padding:7px 14px;border-radius:8px;font-weight:500;color:var(--t2);cursor:pointer;white-space:nowrap}
+.tab small{background:var(--bg);color:var(--m);border-radius:99px;padding:0 7px;margin-left:4px;font-weight:700}
+.tab.on{background:var(--g);color:#fff;font-weight:700}.tab.on small{background:#ffffff40;color:#fff}
+.seg{display:flex;background:var(--g2);border-radius:8px;padding:3px}.seg button{border:0;background:none;padding:5px 10px;border-radius:6px;font-weight:700;font-size:.78rem;color:var(--gd);cursor:pointer}.seg .on{background:#fff;box-shadow:0 1px 3px #0001}
+.sec{margin-bottom:1.25rem}.sh{display:flex;align-items:center;gap:8px;margin-bottom:.5rem}.sh i{width:4px;height:20px;border-radius:4px}.sh small{color:var(--m)}.sh .acts{margin-left:auto;display:flex;gap:4px}
+.grid{display:grid;gap:8px;grid-template-columns:repeat(auto-fill,minmax(270px,1fr))}
+.card{background:var(--w);border:1.5px solid var(--bd);border-left:4px solid var(--c);border-radius:var(--r);padding:11px 14px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:.18s}
+.card:hover{transform:translateY(-2px);box-shadow:0 6px 18px #16a34a22}
+.ic{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;font-size:1.15rem;flex-shrink:0;background:var(--gl)}
+.nm{flex:1;min-width:0}.nm b{display:block;font-size:.92rem;line-height:1.3}.nm small{display:block;color:var(--m);font-size:.7rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.nm p{font-size:.76rem;color:var(--t2)}
+.cl{font-size:.74rem;font-weight:700;color:var(--m);white-space:nowrap}.cl.h{color:var(--warn)}.cl.w{color:var(--g)}
+.ops{display:flex;gap:2px}.ops button,.fav{border:0;background:none;color:var(--m);font-size:.76rem;font-weight:700;padding:3px 6px;border-radius:5px;cursor:pointer}
+.ops button:hover{background:var(--gl);color:var(--gd)}.ops .x:hover{background:#fff4ee;color:var(--warn)}.fav{font-size:1.05rem;color:#cbd5cf}.fav.on{color:#f59e0b}
+.sc{background:#fffbeb;border-color:#fbbf24}
+.list .grid{grid-template-columns:1fr;gap:0;border:1.5px solid var(--bd);border-radius:var(--r);overflow:hidden;background:var(--w)}
+.list .card{border:0;border-bottom:1px solid var(--bd);border-radius:0;padding:8px 14px}.list .card:nth-child(even){background:#f3fbf6}.list .card:hover{transform:none;box-shadow:none;background:var(--g2)}.list .nm p{display:none}
+.panel{background:var(--w);border:1.5px solid var(--bd);border-radius:16px;padding:1.2rem;margin-bottom:1rem}
+.rk{display:flex;align-items:center;gap:10px;padding:5px 0;font-size:.84rem}.rk em{width:22px;font-style:normal;font-weight:900;color:var(--g)}
+.rk .t{flex:1;height:7px;background:var(--g2);border-radius:4px;overflow:hidden}.rk .t i{display:block;height:100%;background:var(--g)}
+.empty{text-align:center;color:var(--m);padding:2.5rem}
+#login{min-height:70vh;display:grid;place-items:center;text-align:center}
+#login .box{background:var(--w);border:1.5px solid var(--bd);border-radius:20px;padding:2.5rem 2rem;max-width:380px}
+#login h2{font:900 1.5rem 'Noto Serif KR',serif;margin:.5rem 0}#login p{color:var(--t2);font-size:.88rem;margin-bottom:1.2rem}
+dialog{border:0;border-radius:18px;padding:1.5rem;width:min(480px,94vw);box-shadow:0 20px 60px #0004}dialog::backdrop{background:#0f2a1a66;backdrop-filter:blur(4px)}dialog h3{margin-bottom:1rem}
+.f{margin-bottom:.8rem}.f label{display:block;font-size:.8rem;font-weight:700;color:var(--t2);margin-bottom:3px}
+.f input,.f select,.f textarea{width:100%;padding:9px 12px;border:1.5px solid var(--bd);border-radius:9px;background:var(--bg);outline:none}
+.f input:focus,.f select:focus,.f textarea:focus{border-color:var(--g);background:#fff}.f input[type=color]{padding:2px;height:38px}.f input[type=checkbox]{width:auto;margin-right:6px}
+.emo{display:flex;flex-wrap:wrap;gap:3px}.emo button{border:1.5px solid transparent;background:var(--bg);border-radius:7px;font-size:1.1rem;padding:4px 6px;cursor:pointer}.emo .on{border-color:var(--g);background:var(--g2)}
+.ft{display:flex;justify-content:flex-end;gap:8px;margin-top:1rem}
+#toast{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%);background:var(--t);color:#fff;padding:10px 20px;border-radius:99px;font-size:.85rem;opacity:0;transition:.25s;pointer-events:none;z-index:99}#toast.s{opacity:1}
+footer{text-align:center;color:var(--m);font-size:.75rem;padding:1.5rem}
+@media(max-width:700px){.hi{padding:0 .75rem}.search{display:none}.hero{padding:1.2rem}.hero h1{font-size:1.4rem}.bar{flex-wrap:wrap}.tabs{flex-basis:100%}.nm small{display:none}}
+</style></head>
+<body>
+<div class="top">🌿 학교업무 도우미</div>
+<header><div class="hi">
+  <div class="logo"><div class="mark">🏫</div>학교업무 도우미</div>
+  <div class="search"><input id="q" placeholder="🔍 이름·설명 검색 (초성도 가능: ㅅㅇㅅㄱㅍ)" oninput="q=this.value.trim().toLowerCase();render()"></div>
+  <div class="sp"></div>
+  <span id="u" style="display:none;align-items:center;gap:8px"><button class="btn" onclick="st=!st;render()">📊</button><span id="adm" class="badge" style="display:none">관리자</span>
+    <button class="btn p" onclick="openLink()">+ 링크</button><button class="btn" id="addCat" style="display:none" onclick="openCat()">+ 분야</button>
+    <img id="ph" class="av" alt=""><button class="btn" onclick="signOutU()">로그아웃</button></span>
+</div></header>
+<main>
+ <div id="login"><div class="box"><div style="font-size:2.5rem">🏫</div><h2>학교업무 도우미</h2><p>학교업무에 필요한 링크를 한곳에 모아둔 공유 공간입니다.<br>구글 계정으로 로그인해 주세요.</p><button class="btn p" onclick="signIn()">Google 계정으로 로그인</button></div></div>
+ <div id="app" style="display:none">
+  <div class="hero"><div><h1>학교업무 <span>도우미</span></h1><p>필요한 링크를 모아두고 함께 쓰는 곳이에요.</p></div>
+   <div class="stats"><div class="st"><b id="sC">0</b><small>업무 분야</small></div><div class="st"><b id="sL">0</b><small>등록 링크</small></div><div class="st"><b id="sK">0</b><small>총 클릭</small></div></div></div>
+  <div class="notice" id="nt"><span>📢</span><span>업무와 관계없는 링크나 개인정보가 포함된 링크는 삭제될 수 있습니다.</span><u onclick="this.parentNode.remove()">✕</u></div>
+  <div id="qk"></div><div id="stp"></div>
+  <div class="bar"><div class="tabs" id="tabs"></div><div class="seg"><button id="vc" onclick="setV('card')">⊞ 카드</button><button id="vl" class="on" onclick="setV('list')">☰ 목록</button></div></div>
+  <div id="ct" class="list"></div>
+ </div>
+</main>
+<footer>학교업무 도우미 · Firebase + GitHub Pages</footer>
+
+<dialog id="dl"><h3 id="dlT">링크 추가</h3>
+ <div class="f"><label>링크 이름 *</label><input id="fN" maxlength="100"></div>
+ <div class="f"><label>URL *</label><input id="fU" placeholder="https://"></div>
+ <div class="f"><label>업무 분야 *</label><select id="fC"></select></div>
+ <div class="f"><label>설명 (선택)</label><textarea id="fD" rows="2" maxlength="500"></textarea></div>
+ <div class="f"><label><input type="checkbox" id="fS">🔐 비밀 링크 (나와 관리자만 보기)</label></div>
+ <div class="f"><label>아이콘</label><div class="emo" id="emo"></div></div>
+ <div class="ft"><button class="btn" onclick="dl.close()">취소</button><button class="btn p" onclick="saveL()">저장</button></div></dialog>
+<dialog id="dc"><h3 id="dcT">분야 추가</h3>
+ <div class="f"><label>분야 이름 *</label><input id="cN" maxlength="30"></div>
+ <div class="f"><label>색상</label><input type="color" id="cCo" value="#16a34a"></div>
+ <div class="ft"><button class="btn" onclick="dc.close()">취소</button><button class="btn p" onclick="saveC()">저장</button></div></dialog>
+<div id="toast"></div>
+
+<script type="module">
+import{initializeApp}from"https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import{getAuth,GoogleAuthProvider,signInWithPopup,signOut,onAuthStateChanged}from"https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+import{getFirestore,collection,doc,addDoc,setDoc,getDoc,updateDoc,deleteDoc,onSnapshot,query,where,orderBy,increment,arrayUnion,arrayRemove}from"https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+/* ▼▼▼ 새 Firebase 프로젝트의 웹앱 설정값으로 교체하세요 ▼▼▼ */
+const firebaseConfig={apiKey:"AIzaSyCwrdA6dhcw8luL-g21uDJuX7K7WLnFHA8",authDomain:"my-school-app-4febc.firebaseapp.com",projectId:"my-school-app-4febc",storageBucket:"my-school-app-4febc.firebasestorage.app",messagingSenderId:"1015313782752",appId:"1:1015313782752:web:78bef2d759c0f8bb3b3d85"};
+/* ▲▲▲ */
+const app=initializeApp(firebaseConfig),auth=getAuth(app),db=getFirestore(app);
+const EM=['🏫','📋','📝','📊','📁','💼','🖥️','🌐','🔗','📧','📞','🔧','🔑','📌','📅','✅','🚀','💡','🎯','📚','🏆','💰','🎓','🧾','🔔'];
+let user=null,admin=false,cats=[],pub={},mine={},all={},favs=[],recent=[],tab='all',q='',st=false,eid=null,ecat=null,emo=EM[0],unsubs=[];
+const $=s=>document.querySelector(s),dl=$('#dl'),dc=$('#dc'),W=window;
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const safe=u=>/^https?:\/\//i.test(u)?u:'#';
+W.toast=m=>{const t=$('#toast');t.textContent=m;t.className='s';setTimeout(()=>t.className='',2400)};
+const fail=e=>{console.error(e);toast('오류: '+(e.code||e.message))};
+
+/* 초성 검색 */
+const CHO='ㄱㄲㄴㄷㄸㄹㅁㅂㅃㅅㅆㅇㅈㅉㅊㅋㅌㅍㅎ';
+const cho=s=>[...s].map(c=>{const n=c.charCodeAt(0)-44032;return n>=0&&n<11172?CHO[Math.floor(n/588)]:c}).join('');
+const isCho=s=>[...s].every(c=>CHO.includes(c));
+function match(l){if(!q)return true;const h=(l.name+' '+l.desc).toLowerCase();return h.includes(q)||(isCho(q)&&cho(l.name).includes(q))}
+
+/* 로그인 */
+W.signIn=()=>signInWithPopup(auth,new GoogleAuthProvider()).catch(e=>e.code!=='auth/popup-closed-by-user'&&fail(e));
+W.signOutU=()=>confirm('로그아웃할까요?')&&signOut(auth);
+onAuthStateChanged(auth,async u=>{
+  unsubs.forEach(f=>f());unsubs=[];user=u;admin=false;pub={};mine={};all={};cats=[];
+  $('#login').style.display=u?'none':'';$('#app').style.display=u?'':'none';$('#u').style.display=u?'flex':'none';
+  if(!u)return;
+  $('#ph').src=u.photoURL||'';
+  try{admin=(await getDoc(doc(db,'sd_admins',u.email))).exists()}catch(e){}
+  $('#adm').style.display=admin?'':'none';$('#addCat').style.display=admin?'':'none';
+  const err=e=>fail(e);
+  unsubs.push(onSnapshot(query(collection(db,'sd_categories'),orderBy('order')),s=>{cats=s.docs.map(d=>({id:d.id,...d.data()}));render()},err));
+  const toMap=s=>Object.fromEntries(s.docs.map(d=>[d.id,{id:d.id,...d.data()}]));
+  if(admin)unsubs.push(onSnapshot(collection(db,'sd_links'),s=>{all=toMap(s);render()},err));
+  else{unsubs.push(onSnapshot(query(collection(db,'sd_links'),where('isSecret','==',false)),s=>{pub=toMap(s);render()},err));
+       unsubs.push(onSnapshot(query(collection(db,'sd_links'),where('uploaderId','==',u.uid)),s=>{mine=toMap(s);render()},err))}
+  unsubs.push(onSnapshot(doc(db,'sd_users',u.uid),s=>{const d=s.data()||{};favs=d.favs||[];recent=d.recent||[];render()},err));
+});
+const links=()=>Object.values(admin?all:{...pub,...mine});
+
+/* 화면 */
+W.setV=v=>{$('#ct').className=v==='list'?'list':'';$('#vc').classList.toggle('on',v==='card');$('#vl').classList.toggle('on',v==='list')};
+function chips(ls){return ls.map(l=>`<span class="chip" onclick="go('${l.id}')">${esc(l.emoji)} ${esc(l.name)}${l.clicks?`<small>${l.clicks}</small>`:''}</span>`).join('')}
+W.render=()=>{
+  if(!user)return;const L=links(),vis=L.filter(match),byId=Object.fromEntries(L.map(l=>[l.id,l]));
+  $('#sC').textContent=cats.length;$('#sL').textContent=L.length;$('#sK').textContent=L.reduce((s,l)=>s+(l.clicks||0),0);
+  const fv=favs.map(i=>byId[i]).filter(Boolean),rc=recent.map(i=>byId[i]).filter(Boolean).slice(0,8),pp=[...L].sort((a,b)=>(b.clicks||0)-(a.clicks||0)).filter(l=>l.clicks).slice(0,6);
+  $('#qk').innerHTML=(!q&&tab==='all'&&(fv.length||rc.length||pp.length))?`<div class="quick">${fv.length?`<h4>⭐ 내 즐겨찾기</h4><div class="chips">${chips(fv)}</div>`:''}${rc.length?`<h4>🕘 최근 사용</h4><div class="chips">${chips(rc)}</div>`:''}${pp.length?`<h4>🔥 인기 링크</h4><div class="chips">${chips(pp)}</div>`:''}</div>`:'';
+  $('#tabs').innerHTML=`<button class="tab ${tab==='all'?'on':''}" onclick="tab='all';render()">전체<small>${vis.length}</small></button>`+cats.map(c=>`<button class="tab ${tab===c.id?'on':''}" onclick="tab='${c.id}';render()">${esc(c.name)}<small>${vis.filter(l=>l.catId===c.id).length}</small></button>`).join('');
+  $('#ct').innerHTML=cats.filter(c=>tab==='all'||c.id===tab).map(c=>{
+    const ls=vis.filter(l=>l.catId===c.id).sort((a,b)=>b.createdAt-a.createdAt);
+    if(!ls.length&&!admin)return'';
+    return `<div class="sec"><div class="sh"><i style="background:${esc(c.color)}"></i><b>${esc(c.name)}</b><small>${ls.length}개</small>${admin?`<div class="acts"><button class="btn" onclick="openCat('${c.id}')">수정</button><button class="btn d" onclick="delCat('${c.id}')">삭제</button></div>`:''}</div>
+    <div class="grid">${ls.map(l=>card(l,c)).join('')||'<div class="empty">링크가 없습니다</div>'}</div></div>`}).join('')||`<div class="empty">📭 ${admin?'오른쪽 위 [+ 분야]로 업무 분야를 먼저 만들어 주세요':'표시할 링크가 없습니다'}</div>`;
+  $('#stp').innerHTML=st?stats(L):'';
+};
+function card(l,c){const n=l.clicks||0,k=n>=20?'h':n>=5?'w':'',ic=n>=20?'🔥':n>=5?'✨':'👁️',can=admin||l.uploaderId===user.uid;
+ return `<div class="card ${l.isSecret?'sc':''}" style="--c:${esc(c.color)}" onclick="go('${l.id}')"><div class="ic">${esc(l.emoji||'🔗')}</div>
+ <div class="nm"><b>${esc(l.name)}${l.isSecret?' 🔐':''}</b><small>${esc(l.url)}</small>${l.desc?`<p>${esc(l.desc)}</p>`:''}</div>
+ <span class="cl ${k}">${ic} ${n}</span><button class="fav ${favs.includes(l.id)?'on':''}" onclick="event.stopPropagation();fav('${l.id}')" title="즐겨찾기">★</button>
+ ${can?`<div class="ops" onclick="event.stopPropagation()"><button onclick="openLink('${l.id}')">수정</button><button class="x" onclick="delL('${l.id}')">삭제</button></div>`:''}</div>`}
+function stats(L){const s=[...L].sort((a,b)=>(b.clicks||0)-(a.clicks||0)).slice(0,10),m=s[0]?.clicks||0;
+ return `<div class="panel"><b>📊 링크 사용 현황 TOP 10</b>${m?s.map((l,i)=>`<div class="rk"><em>${i+1}</em><span style="width:34%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(l.emoji)} ${esc(l.name)}</span><div class="t"><i style="width:${(l.clicks||0)/m*100}%"></i></div><b>${l.clicks||0}</b></div>`).join(''):'<div class="empty">클릭 기록 없음</div>'}</div>`}
+
+/* 동작 */
+W.go=id=>{const l=links().find(x=>x.id===id);if(!l)return;W.open(safe(l.url),'_blank','noopener');
+  updateDoc(doc(db,'sd_links',id),{clicks:increment(1)}).catch(()=>{});
+  setDoc(doc(db,'sd_users',user.uid),{recent:[id,...recent.filter(x=>x!==id)].slice(0,8)},{merge:true}).catch(()=>{})};
+W.fav=id=>setDoc(doc(db,'sd_users',user.uid),{favs:favs.includes(id)?arrayRemove(id):arrayUnion(id)},{merge:true}).catch(fail);
+W.pick=e=>{emo=e;$('#emo').innerHTML=EM.map(x=>`<button class="${x===emo?'on':''}" onclick="pick('${x}')">${x}</button>`).join('')};
+W.openLink=id=>{if(!cats.length)return toast('먼저 관리자가 업무 분야를 만들어야 합니다');
+  const l=id?links().find(x=>x.id===id):null;eid=id||null;emo=l?.emoji||EM[0];
+  $('#dlT').textContent=l?'링크 수정':'링크 추가';$('#fC').innerHTML=cats.map(c=>`<option value="${c.id}">${esc(c.name)}</option>`).join('');
+  $('#fN').value=l?.name||'';$('#fU').value=l?.url||'';$('#fD').value=l?.desc||'';$('#fS').checked=!!l?.isSecret;
+  $('#fC').value=l?.catId||(tab!=='all'?tab:cats[0].id);pick(emo);dl.showModal()};
+W.saveL=async()=>{let url=$('#fU').value.trim();const name=$('#fN').value.trim();
+  if(!name||!url)return toast('이름과 URL을 입력하세요');if(!/^https?:\/\//i.test(url))url='https://'+url;
+  const d={name,url,catId:$('#fC').value,desc:$('#fD').value.trim(),emoji:emo,isSecret:$('#fS').checked};
+  try{if(eid)await updateDoc(doc(db,'sd_links',eid),d);else await addDoc(collection(db,'sd_links'),{...d,uploaderId:user.uid,uploaderName:(user.displayName||'').split(' ')[0],createdAt:Date.now(),clicks:0});
+    dl.close();toast('저장되었습니다 ✓')}catch(e){fail(e)}};
+W.delL=async id=>{const l=links().find(x=>x.id===id);if(l&&confirm(`"${l.name}" 삭제할까요?`))deleteDoc(doc(db,'sd_links',id)).then(()=>toast('삭제되었습니다')).catch(fail)};
+W.openCat=id=>{const c=id?cats.find(x=>x.id===id):null;ecat=id||null;$('#dcT').textContent=c?'분야 수정':'분야 추가';$('#cN').value=c?.name||'';$('#cCo').value=c?.color||'#16a34a';dc.showModal()};
+W.saveC=async()=>{const name=$('#cN').value.trim();if(!name)return toast('분야 이름을 입력하세요');
+  try{if(ecat)await updateDoc(doc(db,'sd_categories',ecat),{name,color:$('#cCo').value});else await addDoc(collection(db,'sd_categories'),{name,color:$('#cCo').value,order:Date.now()});dc.close();toast('저장되었습니다 ✓')}catch(e){fail(e)}};
+W.delCat=async id=>{const c=cats.find(x=>x.id===id),ls=links().filter(l=>l.catId===id);
+  if(!confirm(`"${c.name}" 분야를 삭제할까요?\n포함된 링크 ${ls.length}개도 함께 삭제됩니다.`))return;
+  try{await Promise.all(ls.map(l=>deleteDoc(doc(db,'sd_links',l.id))));await deleteDoc(doc(db,'sd_categories',id));tab='all'}catch(e){fail(e)}};
+setV('list');
+</script></body></html>
