@@ -51,7 +51,7 @@ main{max-width:1200px;margin:auto;padding:1.5rem 1.25rem 3rem}
 .cf{display:flex;align-items:center;justify-content:space-between;gap:6px;margin-top:auto;padding-top:6px;border-top:1px solid var(--bd);flex-wrap:wrap}
 .pills{display:flex;align-items:center;gap:5px;flex-wrap:wrap}
 .cl{background:var(--bg);border-radius:99px;padding:2px 9px;font-size:.7rem;font-weight:700;color:var(--m);white-space:nowrap}.cl.h{background:#fdf0ea;color:var(--warn)}.cl.w{background:var(--g2);color:var(--gd)}
-.up{display:inline-flex;align-items:center;gap:4px;font-size:.68rem;color:var(--m);background:var(--bg);padding:2px 8px;border-radius:99px}.up img{width:14px;height:14px;border-radius:50%}
+.up{display:inline-flex;align-items:center;font-size:.7rem;font-weight:700;padding:2px 9px;border-radius:99px;white-space:nowrap}
 .ai{font-size:.66rem;font-weight:700;color:var(--gd);background:var(--gl);border:1px solid var(--g2);padding:2px 8px;border-radius:99px;white-space:nowrap}
 .sb{font-size:.66rem;font-weight:700;color:#92400e;background:#fef3c7;border:1px solid #fbbf24;padding:1px 7px;border-radius:99px;white-space:nowrap}
 .ops{display:flex;align-items:center;gap:2px}.ops button{border:0;background:none;color:var(--m);font-size:.74rem;font-weight:700;padding:3px 7px;border-radius:5px;cursor:pointer}
@@ -181,7 +181,7 @@ function card(l,c){const n=l.clicks||0,k=n>=20?'h':n>=5?'w':'',ic=n>=20?'🔥':n
  return `<div class="card ${l.isSecret?'sc':''}" style="--c:${esc(c.color)}" onclick="go('${l.id}')" ${dr?`draggable="true" ondragstart="ds(event,'${l.id}')" ondragend="dd()" ondragover="dov(event)" ondragleave="dlv(event)" ondrop="drop(event,'${c.id}','${l.id}')"`:''}>
  <div class="ch"><div class="ic">${esc(l.emoji||'🔗')}</div><div class="nm"><b>${esc(l.name)}${l.isSecret?'<span class="sb">🔐 비밀</span>':''}</b><small>${esc(l.url)}</small></div></div>
  ${l.desc?`<div class="cd">${esc(l.desc)}</div>`:''}
- <div class="cf"><div class="pills"><span class="cl ${k}">${ic} ${n}회</span>${l.uploaderName?`<span class="up">${l.uploaderPhoto?`<img src="${esc(l.uploaderPhoto)}" referrerpolicy="no-referrer" onerror="this.remove()">`:''}${esc(l.uploaderName)}</span>`:''}${l.aiTool?`<span class="ai">🤖 ${esc(l.aiTool)}</span>`:''}</div>
+ <div class="cf"><div class="pills"><span class="cl ${k}">${ic} ${n}회</span><span class="up" style="background:${esc(c.color)}1a;color:${esc(c.color)}">${esc(c.name)}</span>${l.aiTool?`<span class="ai">🤖 ${esc(l.aiTool)}</span>`:''}</div>
  <div class="ops" onclick="event.stopPropagation()"><button class="fav ${favs.includes(l.id)?'on':''}" onclick="fav('${l.id}')" title="즐겨찾기">★</button>${can?`<button onclick="openLink('${l.id}')">✏️ 수정</button><button class="x" onclick="delL('${l.id}')">삭제</button>`:''}</div></div></div>`}
 function stats(L){const s=[...L].sort((a,b)=>(b.clicks||0)-(a.clicks||0)).slice(0,10),m=s[0]?.clicks||0;
  return `<div class="panel"><b>📊 링크 사용 현황 TOP 10</b>${m?s.map((l,i)=>`<div class="rk"><em>${i+1}</em><span style="width:34%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(l.emoji)} ${esc(l.name)}</span><div class="t"><i style="width:${(l.clicks||0)/m*100}%"></i></div><b>${l.clicks||0}</b></div>`).join(''):'<div class="empty">클릭 기록 없음</div>'}</div>`}
