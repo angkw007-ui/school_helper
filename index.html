@@ -86,7 +86,6 @@ footer{text-align:center;color:var(--m);font-size:.75rem;padding:1.5rem}
 <div class="top">🌿 학교업무 도우미</div>
 <header><div class="hi">
   <div class="logo"><div class="mark">🏫</div>학교업무 도우미</div>
-  <div class="search"><input id="q" placeholder="🔍 이름·설명 검색 (초성도 가능: ㅅㅇㅅㄱㅍ)" oninput="q=this.value.trim().toLowerCase();render()"></div>
   <div class="sp"></div>
   <span id="u" style="display:none;align-items:center;gap:8px"><button class="btn" onclick="st=!st;render()">📊</button><span id="adm" class="badge" style="display:none">관리자</span>
     <button class="btn p" onclick="openLink()">+ 링크</button><button class="btn" id="addCat" style="display:none" onclick="openCat()">+ 분야</button><button class="btn" id="edBtn" style="display:none" onclick="toggleEdit()">⚙️ 편집</button>
@@ -98,7 +97,7 @@ footer{text-align:center;color:var(--m);font-size:.75rem;padding:1.5rem}
   <div class="hero"><div><h1>학교업무 <span>도우미</span></h1><p>필요한 링크를 모아두고 함께 쓰는 곳이에요.</p></div>
    <div class="stats"><div class="st"><b id="sC">0</b><small>업무 분야</small></div><div class="st"><b id="sL">0</b><small>등록 링크</small></div><div class="st"><b id="sK">0</b><small>총 클릭</small></div></div></div>
   <div class="notice" id="nt"><span>📢</span><span>업무와 관계없는 링크나 개인정보가 포함된 링크는 삭제될 수 있습니다.</span><u onclick="this.parentNode.remove()">✕</u></div>
-  <div id="qk"></div><div id="stp"></div>
+  <div id="stp"></div>
   <div class="bar"><div class="tabs" id="tabs"></div><span class="hint">✋ 편집모드: 카드를 끌어 순서 변경 · 다른 분야로 이동</span><div class="seg"><button id="vc" onclick="setV('card')">⊞ 카드</button><button id="vl" class="on" onclick="setV('list')">☰ 목록</button></div></div>
   <div id="ct" class="list"></div>
  </div>
@@ -170,8 +169,6 @@ function chips(ls){return ls.map(l=>`<span class="chip" onclick="go('${l.id}')">
 W.render=()=>{
   if(!user)return;const L=links(),vis=L.filter(match),byId=Object.fromEntries(L.map(l=>[l.id,l]));
   $('#sC').textContent=cats.length;$('#sL').textContent=L.length;$('#sK').textContent=L.reduce((s,l)=>s+(l.clicks||0),0);
-  const fv=favs.map(i=>byId[i]).filter(Boolean),rc=recent.map(i=>byId[i]).filter(Boolean).slice(0,8),pp=[...L].sort((a,b)=>(b.clicks||0)-(a.clicks||0)).filter(l=>l.clicks).slice(0,6);
-  $('#qk').innerHTML=(!q&&tab==='all'&&(fv.length||rc.length||pp.length))?`<div class="quick">${fv.length?`<h4>⭐ 내 즐겨찾기</h4><div class="chips">${chips(fv)}</div>`:''}${rc.length?`<h4>🕘 최근 사용</h4><div class="chips">${chips(rc)}</div>`:''}${pp.length?`<h4>🔥 인기 링크</h4><div class="chips">${chips(pp)}</div>`:''}</div>`:'';
   $('#tabs').innerHTML=`<button class="tab ${tab==='all'?'on':''}" onclick="tab='all';render()">전체<small>${vis.length}</small></button>`+cats.map(c=>`<button class="tab ${tab===c.id?'on':''}" onclick="tab='${c.id}';render()">${esc(c.name)}<small>${vis.filter(l=>l.catId===c.id).length}</small></button>`).join('');
   $('#ct').innerHTML=cats.filter(c=>tab==='all'||c.id===tab).map(c=>{
     const ls=vis.filter(l=>l.catId===c.id).sort(ord);
