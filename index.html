@@ -87,7 +87,7 @@ footer{text-align:center;color:var(--m);font-size:.75rem;padding:1.5rem}
 <header><div class="hi">
   <div class="logo"><div class="mark">🏫</div>학교업무 도우미</div>
   <div class="sp"></div>
-  <span id="u" style="display:none;align-items:center;gap:8px"><button class="btn" onclick="st=!st;render()">📊</button><span id="adm" class="badge" style="display:none">관리자</span>
+  <span id="u" style="display:none;align-items:center;gap:8px"><button class="btn" onclick="toggleStats()">📊</button><span id="adm" class="badge" style="display:none">관리자</span>
     <button class="btn p" onclick="openLink()">+ 링크</button><button class="btn" id="addCat" style="display:none" onclick="openCat()">+ 분야</button><button class="btn" id="edBtn" style="display:none" onclick="toggleEdit()">⚙️ 편집</button>
     <img id="ph" class="av" alt=""><button class="btn" onclick="signOutU()">로그아웃</button></span>
 </div></header>
@@ -169,7 +169,7 @@ function chips(ls){return ls.map(l=>`<span class="chip" onclick="go('${l.id}')">
 W.render=()=>{
   if(!user)return;const L=links(),vis=L.filter(match),byId=Object.fromEntries(L.map(l=>[l.id,l]));
   $('#sC').textContent=cats.length;$('#sL').textContent=L.length;$('#sK').textContent=L.reduce((s,l)=>s+(l.clicks||0),0);
-  $('#tabs').innerHTML=`<button class="tab ${tab==='all'?'on':''}" onclick="tab='all';render()">전체<small>${vis.length}</small></button>`+cats.map(c=>`<button class="tab ${tab===c.id?'on':''}" onclick="tab='${c.id}';render()">${esc(c.name)}<small>${vis.filter(l=>l.catId===c.id).length}</small></button>`).join('');
+  $('#tabs').innerHTML=`<button class="tab ${tab==='all'?'on':''}" onclick="setTab('all')">전체<small>${vis.length}</small></button>`+cats.map(c=>`<button class="tab ${tab===c.id?'on':''}" onclick="setTab('${c.id}')">${esc(c.name)}<small>${vis.filter(l=>l.catId===c.id).length}</small></button>`).join('');
   $('#ct').innerHTML=cats.filter(c=>tab==='all'||c.id===tab).map(c=>{
     const ls=vis.filter(l=>l.catId===c.id).sort(ord);
     if(!ls.length&&!admin)return'';
@@ -211,6 +211,8 @@ W.delCat=async id=>{const c=cats.find(x=>x.id===id),ls=links().filter(l=>l.catId
   try{await Promise.all(ls.map(l=>deleteDoc(doc(db,'sd_links',l.id))));await deleteDoc(doc(db,'sd_categories',id));tab='all'}catch(e){fail(e)}};
 
 /* 관리자 편집모드: 링크 순서 변경 / 분야 이동 */
+W.setTab=id=>{tab=id;render()};
+W.toggleStats=()=>{st=!st;render()};
 W.toggleEdit=()=>{if(!admin)return;editMode=!editMode;document.body.classList.toggle('edit',editMode);$('#edBtn').textContent=editMode?'✅ 완료':'⚙️ 편집';render()};
 W.ds=(e,id)=>{dragId=id;e.dataTransfer.effectAllowed='move';e.dataTransfer.setData('text/plain',id);setTimeout(()=>e.target.classList.add('dg'),0)};
 W.dov=e=>{if(!dragId)return;e.preventDefault();e.currentTarget.classList.add('ov')};
