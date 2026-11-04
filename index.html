@@ -34,9 +34,9 @@ main{max-width:1200px;margin:auto;padding:1.5rem 1.25rem 3rem}
 .chips{display:flex;flex-wrap:wrap;gap:6px}.chip{background:var(--gl);border:1.5px solid var(--g2);border-radius:99px;padding:3px 12px;font-size:.8rem;font-weight:500;cursor:pointer}
 .chip:hover{background:var(--g2)}.chip small{color:var(--m);margin-left:4px}
 .bar{display:flex;gap:10px;align-items:center;margin-bottom:1rem}
-.tabs{flex:1;display:flex;gap:4px;background:var(--w);border:1.5px solid var(--bd);border-radius:12px;padding:5px;overflow-x:auto;scrollbar-width:none}
+.tabs{flex:1;display:flex;gap:4px;background:#e8f1fd;border:1.5px solid #c9dcf5;border-radius:12px;padding:5px;overflow-x:auto;scrollbar-width:none}
 .tab{border:0;background:none;padding:7px 14px;border-radius:8px;font-weight:500;color:var(--t2);cursor:pointer;white-space:nowrap}
-.tab small{background:var(--bg);color:var(--m);border-radius:99px;padding:0 7px;margin-left:4px;font-weight:700}
+.tab small{background:#fff;color:var(--m);border-radius:99px;padding:0 7px;margin-left:4px;font-weight:700}
 .tab.on{background:var(--g);color:#fff;font-weight:700}.tab.on small{background:#ffffff40;color:#fff}
 .seg{display:flex;background:var(--g2);border-radius:8px;padding:3px}.seg button{border:0;background:none;padding:5px 10px;border-radius:6px;font-weight:700;font-size:.78rem;color:var(--gd);cursor:pointer}.seg .on{background:#fff;box-shadow:0 1px 3px #0001}
 .sec{margin-bottom:1.25rem}.sh{display:flex;align-items:center;gap:8px;margin-bottom:.5rem}.sh i{width:4px;height:20px;border-radius:4px}.sh small{color:var(--m)}.sh .acts{margin-left:auto;display:flex;gap:4px}
@@ -60,7 +60,8 @@ main{max-width:1200px;margin:auto;padding:1.5rem 1.25rem 3rem}
 .sc{background:linear-gradient(135deg,#fefce8,#fffbeb);border-color:#fbbf24}
 .list .grid{grid-template-columns:1fr;gap:0;border:1.5px solid var(--bd);border-radius:var(--r);overflow:hidden;background:var(--w)}
 .list .card{flex-direction:row;align-items:center;gap:12px;border:0;border-bottom:1px solid var(--bd);border-radius:0;padding:8px 14px;box-shadow:none}
-.list .ch{flex:1;align-items:center}.list .cd{display:none}.list .cf{border:0;padding:0;margin:0;flex-wrap:nowrap}
+.cd:empty{display:none}
+.list .ch{flex:1 1 42%;align-items:center;min-width:0}.list .cd{flex:1 1 30%;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:.78rem}.list .cd:empty{display:block}.list .cf{border:0;padding:0;margin:0;flex-wrap:nowrap;flex:0 0 auto}
 .list .card:nth-child(even){background:#f3fbf6}.list .card:hover{transform:none;box-shadow:none;background:var(--g2)}.list .sc,.list .sc:nth-child(even){background:#fffbeb}
 .hint{display:none;font-size:.75rem;color:var(--gd);background:var(--gl);border:1px solid var(--g2);padding:5px 12px;border-radius:99px;font-weight:700;white-space:nowrap}
 body.edit .hint{display:block}body.edit .grid{outline:2px dashed var(--g);outline-offset:4px;border-radius:var(--r);min-height:70px}
@@ -80,7 +81,25 @@ dialog{border:0;border-radius:18px;padding:1.5rem;width:min(480px,94vw);box-shad
 .ft{display:flex;justify-content:flex-end;gap:8px;margin-top:1rem}
 #toast{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%);background:var(--t);color:#fff;padding:10px 20px;border-radius:99px;font-size:.85rem;opacity:0;transition:.25s;pointer-events:none;z-index:99}#toast.s{opacity:1}
 footer{text-align:center;color:var(--m);font-size:.75rem;padding:1.5rem}
-@media(max-width:700px){.hi{padding:0 .75rem}.search{display:none}.hero{padding:1.2rem}.hero h1{font-size:1.4rem}.bar{flex-wrap:wrap}.tabs{flex-basis:100%}.hint{display:none!important}}
+@media(max-width:700px){
+.hi{height:auto;min-height:56px;padding:8px .75rem;flex-wrap:wrap;gap:6px}
+.logo{font-size:1rem}.mark{width:32px;height:32px;font-size:1rem}
+#u{flex-wrap:wrap;justify-content:flex-end;gap:5px!important}
+.btn{padding:6px 9px;font-size:.74rem}.av{width:28px;height:28px}
+main{padding:1rem .75rem 2.5rem}.top{font-size:.72rem;padding:4px}
+.hero{padding:1rem 1.1rem;border-radius:16px;gap:.8rem}.hero h1{font-size:1.35rem}.hero p{font-size:.8rem}
+.stats{width:100%;gap:.5rem}.st{flex:1;min-width:0;padding:8px 6px}.st b{font-size:1.25rem}
+.notice{font-size:.78rem;padding:8px 12px}
+.bar{flex-wrap:wrap}.tabs{flex-basis:100%;order:1}.seg{margin-left:auto}.tab{padding:7px 12px;font-size:.82rem}
+.hint{display:none!important}.grid{grid-template-columns:1fr}.sh .acts .btn{padding:5px 8px}
+.list .card{flex-wrap:wrap;gap:4px 8px;padding:10px 12px}
+.list .ch{flex:1 1 100%}
+.list .cd{flex:1 1 100%;white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}.list .cd:empty{display:none}
+.list .cf{flex:1 1 100%;justify-content:space-between;flex-wrap:wrap}
+.nm small{font-size:.66rem}.ops button{padding:6px 9px}.ops .fav{font-size:1.2rem}
+dialog{width:100%;max-width:100%;margin:auto 0 0;border-radius:18px 18px 0 0;max-height:92vh;overflow-y:auto;padding:1.25rem}
+.f input,.f select,.f textarea{font-size:16px}.emo button{padding:6px 8px}
+}
 </style></head>
 <body>
 <div class="top">🌿 학교업무 도우미</div>
@@ -98,7 +117,7 @@ footer{text-align:center;color:var(--m);font-size:.75rem;padding:1.5rem}
    <div class="stats"><div class="st"><b id="sC">0</b><small>업무 분야</small></div><div class="st"><b id="sL">0</b><small>등록 링크</small></div><div class="st"><b id="sK">0</b><small>총 클릭</small></div></div></div>
   <div class="notice" id="nt"><span>📢</span><span>업무와 관계없는 링크나 개인정보가 포함된 링크는 삭제될 수 있습니다.</span><u onclick="this.parentNode.remove()">✕</u></div>
   <div id="stp"></div>
-  <div class="bar"><div class="tabs" id="tabs"></div><span class="hint">✋ 편집모드: 카드를 끌어 순서 변경 · 다른 분야로 이동</span><div class="seg"><button id="vc" onclick="setV('card')">⊞ 카드</button><button id="vl" class="on" onclick="setV('list')">☰ 목록</button></div></div>
+  <div class="bar"><div class="tabs" id="tabs"></div><span class="hint">✋ 편집모드: 카드를 끌거나 ▲▼로 순서 변경 · 끌어서 다른 분야로 이동</span><div class="seg"><button id="vc" onclick="setV('card')">⊞ 카드</button><button id="vl" class="on" onclick="setV('list')">☰ 목록</button></div></div>
   <div id="ct" class="list"></div>
  </div>
 </main>
@@ -180,9 +199,9 @@ W.render=()=>{
 function card(l,c){const n=l.clicks||0,k=n>=20?'h':n>=5?'w':'',ic=n>=20?'🔥':n>=5?'✨':'👁️',can=admin||l.uploaderId===user.uid,dr=admin&&editMode;
  return `<div class="card ${l.isSecret?'sc':''}" style="--c:${esc(c.color)}" onclick="go('${l.id}')" ${dr?`draggable="true" ondragstart="ds(event,'${l.id}')" ondragend="dd()" ondragover="dov(event)" ondragleave="dlv(event)" ondrop="drop(event,'${c.id}','${l.id}')"`:''}>
  <div class="ch"><div class="ic">${esc(l.emoji||'🔗')}</div><div class="nm"><b>${esc(l.name)}${l.isSecret?'<span class="sb">🔐 비밀</span>':''}</b><small>${esc(l.url)}</small></div></div>
- ${l.desc?`<div class="cd">${esc(l.desc)}</div>`:''}
+ <div class="cd" title="${esc(l.desc||'')}">${esc(l.desc||'')}</div>
  <div class="cf"><div class="pills"><span class="cl ${k}">${ic} ${n}회</span><span class="up" style="background:${esc(c.color)}1a;color:${esc(c.color)}">${esc(c.name)}</span>${l.aiTool?`<span class="ai">🤖 ${esc(l.aiTool)}</span>`:''}</div>
- <div class="ops" onclick="event.stopPropagation()"><button class="fav ${favs.includes(l.id)?'on':''}" onclick="fav('${l.id}')" title="즐겨찾기">★</button>${can?`<button onclick="openLink('${l.id}')">✏️ 수정</button><button class="x" onclick="delL('${l.id}')">삭제</button>`:''}</div></div></div>`}
+ <div class="ops" onclick="event.stopPropagation()">${dr?`<button onclick="mv('${l.id}',-1)" title="위로">▲</button><button onclick="mv('${l.id}',1)" title="아래로">▼</button>`:''}<button class="fav ${favs.includes(l.id)?'on':''}" onclick="fav('${l.id}')" title="즐겨찾기">★</button>${can?`<button onclick="openLink('${l.id}')">✏️ 수정</button><button class="x" onclick="delL('${l.id}')">삭제</button>`:''}</div></div></div>`}
 function stats(L){const s=[...L].sort((a,b)=>(b.clicks||0)-(a.clicks||0)).slice(0,10),m=s[0]?.clicks||0;
  return `<div class="panel"><b>📊 링크 사용 현황 TOP 10</b>${m?s.map((l,i)=>`<div class="rk"><em>${i+1}</em><span style="width:34%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(l.emoji)} ${esc(l.name)}</span><div class="t"><i style="width:${(l.clicks||0)/m*100}%"></i></div><b>${l.clicks||0}</b></div>`).join(''):'<div class="empty">클릭 기록 없음</div>'}</div>`}
 
@@ -211,6 +230,10 @@ W.delCat=async id=>{const c=cats.find(x=>x.id===id),ls=links().filter(l=>l.catId
   try{await Promise.all(ls.map(l=>deleteDoc(doc(db,'sd_links',l.id))));await deleteDoc(doc(db,'sd_categories',id));tab='all'}catch(e){fail(e)}};
 
 /* 관리자 편집모드: 링크 순서 변경 / 분야 이동 */
+W.mv=async(id,dir)=>{if(!admin)return;const L=links(),d=L.find(x=>x.id===id);if(!d)return;
+  const list=L.filter(x=>x.catId===d.catId).sort(ord),i=list.findIndex(x=>x.id===id),j=i+dir;if(j<0||j>=list.length)return;
+  [list[i],list[j]]=[list[j],list[i]];
+  try{const b=writeBatch(db);list.forEach((x,k)=>{if(x.linkOrder!==k*1000)b.update(doc(db,'sd_links',x.id),{linkOrder:k*1000})});await b.commit()}catch(e){fail(e)}};
 W.setTab=id=>{tab=id;render()};
 W.toggleStats=()=>{st=!st;render()};
 W.toggleEdit=()=>{if(!admin)return;editMode=!editMode;document.body.classList.toggle('edit',editMode);$('#edBtn').textContent=editMode?'✅ 완료':'⚙️ 편집';render()};
